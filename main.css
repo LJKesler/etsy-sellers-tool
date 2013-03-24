@@ -3,3 +3,6 @@ span.disclosure{
 	font-style:italics;
 	color:#ccc;
 }
+#step2{
+	display:none;
+}

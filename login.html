@@ -5,7 +5,8 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-	<script src="./login.js"></script>
+	<script type="text/javascript" src="./login.js"></script>
+
 	<link rel="stylesheet" href="./main.css" />
 </head>
 <body>
@@ -15,10 +16,11 @@
 		</div>
 		<div data-role="content">
 			<form id="etsy-login">
-				<input type="text" name="username" id="username" placeholder="Etsy Email or Username"/>
+				<input type="text" name="username" id="username" placeholder="Username"/>
 				<input type="password" name="password" id="password" placeholder="Password"/>
 				<input type="button" id ="submit" value="Login">
 			</form>
+			<div>Are you a new user? If so, click <a href="register.html"> here to register.</a> </div>
 			<div id="errormsg"></div>
 		</div>
 		<div data-role="footer" data-id="siteFooter" data-position="fixed">

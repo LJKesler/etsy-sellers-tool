@@ -14,6 +14,5 @@ require 'oauth.inc.php';
 	    $result = "{\"response\":\"failure\"}";
 	}
 
-	header('Content-Type: application/json');
-	echo json_encode($result);
+	header("Location: " . $req_token['login_url']);
 ?>
