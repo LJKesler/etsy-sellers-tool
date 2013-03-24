@@ -1,7 +1,12 @@
 <?php
 require 'oauth.inc.php';
+require 'db.inc.php';
 
 	$result;
+	$uname = $_POST['new_username'];
+	$pwd = $_POST['new_password'];
+	$query = "insert into registered_users (username, password) values ('". $uname . "','" . $pwd . "')";
+	$queryResult = mysqli_query($link, $query);
 
 	try {
 	   	$oauth = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
