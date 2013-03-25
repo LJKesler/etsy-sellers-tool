@@ -4,6 +4,7 @@ require 'db.inc.php';
 
 	$request_token = $_GET['oauth_token'];
 	$request_token_secret = $_COOKIE['requestTokenSecret'];
+
 	$oauth = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
 	$oauth->disableSSLChecks();
 	$oauth->setToken($request_token, $request_token_secret);
@@ -18,6 +19,7 @@ require 'db.inc.php';
 	    //TODO :: Persist to db;
 	
 	} catch (OAuthException $e) {
+		error_log('Step 2 exception');
 	    error_log($e->getMessage());
 	    error_log(print_r($oauth->getLastResponse(), true));
 	    error_log(print_r($oauth->getLastResponseInfo(), true));
@@ -33,6 +35,7 @@ try {
     print_r(json_decode($json, true));
     
 } catch (OAuthException $e) {
+	error_log("Step 3 Error :: \n");
     error_log($e->getMessage());
     error_log(print_r($oauth->getLastResponse(), true));
     error_log(print_r($oauth->getLastResponseInfo(), true));
