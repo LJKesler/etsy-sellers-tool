@@ -1,9 +1,10 @@
 <?php
+    require 'url.inc.php';
     require 'oauth.inc.php';
     require 'db.inc.php';
 
     $result;
-    $url = 'http://sandbox.openapi.etsy.com/v2' . $_GET['apiURL'];
+    $url = ETSY_SANDBOX_BASE . $_GET['apiURL'];
  
     $user = $_GET['user'];
 
