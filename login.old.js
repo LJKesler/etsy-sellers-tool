@@ -8,7 +8,7 @@ $(document).on( "pageshow", "#login", function( event ) {
 			var result = $.parseJSON(responseData).response;
 			if(result == "success"){
 				localStorage.setItem("username", $("#username").val());
-				window.location = "http://leighkesler.com/etsydev/main.html";
+				window.location = "http://localhost:8888/main.html";
 			}else{
 				$("#errormsg").text("Sorry, we cannot log you in at this time. Please try again later. Thanks!");	
 			}
