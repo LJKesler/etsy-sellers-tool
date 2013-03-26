@@ -3,7 +3,16 @@
     require 'db.inc.php';
 
     $result;
-    $url = $_GET['apiURL'];
+    $url = 'http://sandbox.openapi.etsy.com/v2' . $_GET['apiURL'];
+ 
+    $user = $_GET['user'];
+
+    $actQuery = "SELECT accessToken FROM registered_users where username = '". $username . "'";
+    $access_token_result = mysqli_query($link, $actQuery);
+
+    $actsQuery = "SELECT accessTokenSecret FROM registered_users where username = '". $username . "'";
+    $access_token_secret_result = mysqli_query($link, $actsQuery);
+    
 
     $oauth = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
     $oauth->setToken($access_token, $access_token_secret);
