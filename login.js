@@ -1,13 +1,14 @@
 $(document).on( "pageshow", "#login", function( event ) {
 	$("#submit").click(function(){
 		
-		var data = $("#loginform").serialize();
+		var data = $("#login-form").serialize();
 
 		$.post("./php/login.php", data)
 		.done(function(responseData){
 			var result = $.parseJSON(responseData).response;
 			if(result == "success"){
-				$.mobile.navigate("main.html");
+				localStorage.setItem("username", $("#username").val());
+				window.location = "http://localhost:8888/main.html";
 			}else{
 				$("#errormsg").text("Sorry, we cannot log you in at this time. Please try again later. Thanks!");	
 			}

@@ -1,6 +1,6 @@
 $().ready(function(){
-
-	user.updateUserName('abc');
+	var username = localStorage.getItem("username");
+	user.updateUserName(username);
 
 });
 
