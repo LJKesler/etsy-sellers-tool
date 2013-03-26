@@ -15,7 +15,7 @@ require 'db.inc.php';
     $access_token;
 
 	try {
-	    $acc_token = $oauthStep2->getAccessToken("https://sandbox.openapi.etsy.com/v2/oauth/access_token", null, $verifier);
+	    $acc_token = $oauthStep2->getAccessToken("http://sandbox.openapi.etsy.com/v2/oauth/access_token", null, $verifier);
 	    $access_token_secret = $acc_token['oauth_token_secret'];
 	    $access_token = $acc_token['oauth_token'];
 
@@ -35,7 +35,7 @@ require 'db.inc.php';
     $oauthStep3->setToken($access_token, $access_token_secret);
 
 try {
-    $data = $oauthStep3->fetch("https://sandbox.openapi.etsy.com/v2/users/__SELF__", null, OAUTH_HTTP_METHOD_GET);
+    $data = $oauthStep3->fetch("http://sandbox.openapi.etsy.com/v2/users/__SELF__", null, OAUTH_HTTP_METHOD_GET);
     $json = $oauthStep3->getLastResponse();
     print_r(json_decode($json, true));
     
