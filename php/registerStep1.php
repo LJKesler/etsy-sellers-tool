@@ -22,6 +22,5 @@
 			$result = array('response' => 'username unavailable');
 		}
 	}
-
 	echo json_encode($result);
 ?>

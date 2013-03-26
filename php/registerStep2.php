@@ -6,7 +6,7 @@ require 'db.inc.php';
 
 	try {
 	   	$oauth = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
-	   	$req_token = $oauth->getRequestToken("http://sandbox.openapi.etsy.com/v2/oauth/request_token?scope=email_r",CALLBACK_URL);
+	   	$req_token = $oauth->getRequestToken("http://sandbox.openapi.etsy.com/v2/oauth/request_token",CALLBACK_URL);
 	   	
 		setcookie("requestTokenSecret", $req_token['oauth_token_secret']);
 		

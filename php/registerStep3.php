@@ -22,11 +22,13 @@
 	    $username = $_COOKIE['user'];
 	    $query = "UPDATE registered_users SET accessToken='".$access_token."', accessTokenSecret='" . $access_token_secret . "' where username = '". $username."';";
 	    $insertTokenQueryResult = mysqli_query($link, $query);
-	
+	    header("Location: http://localhost:8888/main.html");
+	    exit;
 	} catch (OAuthException $e) {
 		error_log('Step 2 exception');
 	    error_log($e->getMessage());
 	    error_log(print_r($oauthStep2->getLastResponse(), true));
 	    error_log(print_r($oauthStep2->getLastResponseInfo(), true));
 	}
+	
 ?>

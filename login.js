@@ -1,11 +1,20 @@
 $(document).on( "pageshow", "#login", function( event ) {
 	$("#submit").click(function(){
 		
-		var uname = $("#username").val();
-		var pwd = $("#password").val();
-		
-		$.mobile.navigate("main.html");
-		
+		var data = $("#loginform").serialize();
+
+		$.post("./php/login.php", data)
+		.done(function(responseData){
+			var result = $.parseJSON(responseData).response;
+			if(result == "success"){
+				$.mobile.navigate("main.html");
+			}else{
+				$("#errormsg").text("Sorry, we cannot log you in at this time. Please try again later. Thanks!");	
+			}
+		})
+		.fail(function(responseData){
+			$("#errormsg").text("Sorry, we cannot register you in at this time. Please try again later. Thanks!");
+		});		
 	});
 });
 
@@ -21,7 +30,6 @@ $(document).on("pageshow","#registration",function(event){
 				$.mobile.navigate("#registration-step2");
 			}else{
 				$("#errormsg").text("Oops! Somebody has already taken that username. ");
-				$("#errormsg").show();	
 			}
 		})
 		.fail(function(){
