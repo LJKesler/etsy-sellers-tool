@@ -14,6 +14,8 @@
 	}else{
 		$insertQuery = "INSERT INTO registered_users (username, password) VALUES ('". $username . "','" . $password . "' )";
 		$insertQueryResult = mysqli_query($link, $insertQuery);
+		setcookie("user", $username);
+		
 		if($insertQueryResult == 1){
 			$result = array('response' => 'success');
 		}else{

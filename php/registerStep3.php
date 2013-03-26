@@ -6,17 +6,22 @@ require 'db.inc.php';
 	$request_token_secret = $_COOKIE['requestTokenSecret'];
 
 	$oauthStep2 = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
-	$oauoauthStep2th->disableSSLChecks();
+
 	$oauthStep2->setToken($request_token, $request_token_secret);
 
 	$verifier = $_GET['oauth_verifier'];
+
+	$access_token_secret;
+    $access_token;
 
 	try {
 	    $acc_token = $oauthStep2->getAccessToken("https://sandbox.openapi.etsy.com/v2/oauth/access_token", null, $verifier);
 	    $access_token_secret = $acc_token['oauth_token_secret'];
 	    $access_token = $acc_token['oauth_token'];
-	    
-	    //TODO :: Persist to db;
+
+	    $username = $_COOKIE['user'];
+	    $query = "UPDATE registered_users SET accessToken='".$access_token."', accessTokenSecret='" . $access_token_secret . "' where username = '". $username."';";
+	    $insertTokenQueryResult = mysqli_query($link, $query);
 	
 	} catch (OAuthException $e) {
 		error_log('Step 2 exception');
@@ -30,7 +35,7 @@ require 'db.inc.php';
     $oauthStep3->setToken($access_token, $access_token_secret);
 
 try {
-    $data = $oauthStep3->fetch("https://sandbox.openapi.etsy.com/v2/oauth/scopes", null, OAUTH_HTTP_METHOD_GET);
+    $data = $oauthStep3->fetch("https://sandbox.openapi.etsy.com/v2/users/__SELF__", null, OAUTH_HTTP_METHOD_GET);
     $json = $oauthStep3->getLastResponse();
     print_r(json_decode($json, true));
     
