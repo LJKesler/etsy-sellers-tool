@@ -1,10 +1,11 @@
 <?php
+    require 'env.inc.php';
     require 'url.inc.php';
     require 'oauth.inc.php';
     require 'db.inc.php';
 
     $result;
-    $url = ETSY_SANDBOX_URL . $_GET['apiUrl'];
+    $url = ETSY_URL . $_GET['apiUrl'];
  
     $username = $_GET['user'];
 

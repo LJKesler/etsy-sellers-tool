@@ -1,4 +1,5 @@
 <?php
+	require 'env.inc.php';
 	require 'db.inc.php';
 
 	$username = $_GET['new_username'];

@@ -1,11 +1,20 @@
 <?php
+require 'env.inc.php';
 require 'oauth.inc.php';
+require 'db.inc.php';
+require 'url.inc.php';
 
 	$result;
+	$etsyUserName = $_POST['etsyUsername'];
+	$username = $_COOKIE['user'];
 
 	try {
+
+		$query = "UPDATE registered_users SET etsyUsername='".$etsyUserName."' where username = '". $username."';";
+	    $link->query($query);
+
 	   	$oauth = new OAuth(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
-	   	$req_token = $oauth->getRequestToken("http://sandbox.openapi.etsy.com/v2/oauth/request_token",CALLBACK_URL);
+	   	$req_token = $oauth->getRequestToken(ETSY_URL . "/oauth/request_token",CALLBACK_URL);
 	   	
 		setcookie("requestTokenSecret", $req_token['oauth_token_secret']);
 		
