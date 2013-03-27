@@ -2,7 +2,16 @@ $(document).on("pageshow", "#home", function(){
 	var username = localStorage.getItem("username");
 	user.updateUserName(username);
 
-	util.apiCall({apiUrl: '/oauth/scopes', user: username}, user.displayPermissions)
+	$.ajax({
+		url: "http://sandbox.openapi.etsy.com/v2/private/users/__SELF__/shops.js?api_key=myh388wa8wpx2ukcfrjnwi1d",
+		dataType: "JSONP"
+	})
+	.done(function(result){
+		user.updateUserName(result.results[0].login_name);
+	})
+	.fail(function(){
+
+	});
 	
 });
 
@@ -11,20 +20,19 @@ var user = {
 		$("#username").text(name);
 	},
 	displayPermissions : function(result){
-		alert(result);
+		
 	}
 }
 var util = {
 
-	apiCall : function(data, callbackFn){
+	oauthApiCall : function(data, callbackFn){
 		$.get("./php/apiCall.php", data)
 		.done(function(responseData){
-			var result = $.parseJSON(responseData).reponse;
-			callbackFn(result);
+			var result = $.parseJSON(responseData);
+			callbackFn(result.response);
 		})
 		.fail(function(responseData){
 
 		});
 	}
-
 }
