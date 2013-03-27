@@ -19,8 +19,8 @@ var util = {
 	apiCall : function(data, callbackFn){
 		$.get("./php/apiCall.php", data)
 		.done(function(responseData){
-			var result = $.parseJSON(responseData).reponse;
-			callbackFn(result);
+			var result = $.parseJSON(responseData);
+			callbackFn(result.response);
 		})
 		.fail(function(responseData){
 

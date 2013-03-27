@@ -1,6 +1,5 @@
 <?php
 require 'oauth.inc.php';
-require 'db.inc.php';
 
 	$result;
 

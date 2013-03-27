@@ -5,15 +5,16 @@
 	$password = $_GET['new_password'];
 
 	$query = "SELECT * FROM registered_users where username = '". $username . "'";
-	$queryResult = mysqli_query($link, $query);
-	$num_results = mysqli_num_rows($queryResult); 
+	$queryResult = $link->query($query);
+	$num_results = $queryResult->num_rows(); 
+
 	$result;
 
 	if ($num_results > 0){ 
 		$result = array('response' => 'username unavailable');
 	}else{
 		$insertQuery = "INSERT INTO registered_users (username, password) VALUES ('". $username . "','" . $password . "' )";
-		$insertQueryResult = mysqli_query($link, $insertQuery);
+		$insertQueryResult = $link->query($insertQuery);
 		setcookie("user", $username);
 		
 		if($insertQueryResult == 1){
