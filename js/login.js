@@ -40,8 +40,9 @@ $(document).on("pageshow","#registration",function(event){
 });
 
 $(document).on("pageshow", "#registration-step2", function(event){
+	var data = $("#registration-form-step2").serialize();
 	$("#authorize").click(function(){
-		$.get('./php/registerStep2.php')
+		$.post('./php/registerStep2.php', data)
 		.done(function(responseData){
 			var result = $.parseJSON(responseData).response;
 			window.location = result;
