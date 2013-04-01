@@ -1,4 +1,5 @@
 <?php
+	require 'env.inc.php';
 	require 'db.inc.php';
 
 	$username = $_POST['username'];
@@ -10,7 +11,7 @@
 
 	if($num_results == 1){
 		$result = array('response' => 'success');
-	}else{
+	} else {
 		$result = array('response' => 'failure');
 	}
 

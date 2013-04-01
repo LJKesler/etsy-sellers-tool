@@ -1,28 +1,40 @@
+var userShops;
+
 $(document).on("pageshow", "#home", function(){
 	var username = localStorage.getItem("username");
-	user.updateUserName(username);
-
+	username = "ljkesler";
 	$.ajax({
-		url: "http://sandbox.openapi.etsy.com/v2/private/users/__SELF__/shops.js?api_key=myh388wa8wpx2ukcfrjnwi1d",
+		url: "http://sandbox.openapi.etsy.com/v2/private/users/" + username +"/shops.js?api_key=myh388wa8wpx2ukcfrjnwi1d",
 		dataType: "JSONP"
 	})
 	.done(function(result){
-		user.updateUserName(result.results[0].login_name);
+		var numberOfShops = result.count;
+		userShops = new ShopList();
+		if(numberOfShops >= 1){
+			for(var i=0; i<result.results.length; i++){
+				var entry = result.results[i];
+
+				var shop = new Shop({
+					name: "\"" + entry.shop_name + "\"",
+					vacationMode:entry.is_vacation,
+					shopId: entry.shop_id,
+					activeListings: entry.listings_active_count
+				});
+
+				userShops.add(shop);
+			}
+		}
+		var user = new User({name: username});
 	})
 	.fail(function(){
-
-	});
-	
+		/*Error Handling*/
+	});	
 });
 
-var user = {
-	updateUserName : function(name){
-		$("#username").text(name);
-	},
-	displayPermissions : function(result){
-		
-	}
-}
+$(document).on("pageshow", "#listings", function(){
+	var shopView = new ShopView();
+});
+
 var util = {
 
 	oauthApiCall : function(data, callbackFn){
@@ -34,5 +46,8 @@ var util = {
 		.fail(function(responseData){
 
 		});
+	},
+	createUser : function(username){
+		return new User({name:username});
 	}
 }
